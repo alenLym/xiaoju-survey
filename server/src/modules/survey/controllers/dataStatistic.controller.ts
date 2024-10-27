@@ -35,6 +35,7 @@ export class DataStatisticController {
     private readonly logger: Logger,
   ) {}
 
+  // 获取数据表格
   @Get('/dataTable')
   @HttpCode(200)
   @UseGuards(SurveyGuard)
@@ -84,6 +85,7 @@ export class DataStatisticController {
     };
   }
 
+  // 获取聚合统计
   @Get('/aggregationStatis')
   @HttpCode(200)
   @UseGuards(Authentication)

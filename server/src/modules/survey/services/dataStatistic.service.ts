@@ -18,6 +18,7 @@ export class DataStatisticService {
     private readonly surveyResponseRepository: MongoRepository<SurveyResponse>,
   ) {}
 
+  // 获取数据表格
   async getDataTable({
     surveyId,
     pageNum,
@@ -103,6 +104,7 @@ export class DataStatisticService {
     };
   }
 
+  // 获取聚合统计
   async aggregationStatis({ surveyId, fieldList }) {
     const $facet = fieldList.reduce((pre, cur) => {
       const $match = { $match: { [`data.${cur}`]: { $nin: [[], '', null] } } };

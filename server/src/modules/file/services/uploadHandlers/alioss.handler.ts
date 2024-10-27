@@ -4,6 +4,7 @@ import { join } from 'path';
 import { parseExpiryTimeToSeconds } from '../../utils/parseExpiryTimeToSeconds';
 import { FileUploadHandler } from './uploadHandler.interface';
 
+// 阿里云OSS上传处理器
 export class AliOssHandler implements FileUploadHandler {
   private client: OSS;
   endPoint: string;
@@ -31,7 +32,9 @@ export class AliOssHandler implements FileUploadHandler {
     isPrivateRead?: boolean;
     expiryTime?: string;
   }) {
+    // 如果客户端不存在
     if (!client) {
+      // 创建客户端
       client = new OSS({
         region,
         accessKeyId: accessKey,
@@ -39,20 +42,28 @@ export class AliOssHandler implements FileUploadHandler {
         bucket,
       });
     }
+    // 设置客户端
     this.client = client;
+    // 设置端点
     this.endPoint = endPoint;
+    // 设置是否使用SSL
     this.useSSL = useSSL;
+    // 设置是否私有读
     this.isPrivateRead = isPrivateRead;
+    // 设置过期时间
     this.expiryTime = expiryTime;
   }
 
+  // 上传文件
   async upload(
     file: Express.Multer.File,
     options?: {
       pathPrefix?: string;
     },
   ): Promise<{ key: string }> {
+    // 获取路径前缀
     const { pathPrefix } = options || {};
+    // 生成唯一文件名
     const key = join(
       pathPrefix || '',
       await generateUniqueFilename(file.originalname),
@@ -63,8 +74,11 @@ export class AliOssHandler implements FileUploadHandler {
     return { key };
   }
 
+  // 获取文件URL
   getUrl(key: string): string {
+    // 解析过期时间
     const expireTimeSeconds = parseExpiryTimeToSeconds(this.expiryTime);
+    // 如果需要私有读
     if (this.isPrivateRead) {
       const url = this.client.signatureUrl(key, {
         expires: expireTimeSeconds,

@@ -1,8 +1,10 @@
+// 角色
 export enum ROLE {
   ADMIN = 'admin',
   USER = 'user',
 }
 
+// 角色描述
 export const ROLE_DESCRIPTION = {
   ADMIN: {
     name: '管理员',
@@ -14,6 +16,7 @@ export const ROLE_DESCRIPTION = {
   },
 };
 
+// 权限
 export enum PERMISSION {
   READ_WORKSPACE = 'READ_WORKSPACE',
   WRITE_WORKSPACE = 'WRITE_WORKSPACE',
@@ -23,6 +26,7 @@ export enum PERMISSION {
   WRITE_SURVEY = 'WRITE_SURVEY',
 }
 
+// 角色权限
 export const ROLE_PERMISSION: Record<ROLE, PERMISSION[]> = {
   [ROLE.ADMIN]: [
     PERMISSION.READ_WORKSPACE,

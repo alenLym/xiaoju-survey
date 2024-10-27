@@ -16,6 +16,7 @@ export class SurveyMetaService {
     private readonly pluginManager: XiaojuSurveyPluginManager,
   ) {}
 
+  // 获取新的问卷路径
   async getNewSurveyPath(): Promise<string> {
     let surveyPath = await this.pluginManager.triggerHook('genSurveyPath');
     while (true) {
@@ -32,12 +33,14 @@ export class SurveyMetaService {
     return surveyPath;
   }
 
+  // 获取问卷元数据
   async getSurveyById({ surveyId }) {
     return this.surveyRepository.findOne({
       where: { _id: new ObjectId(surveyId) },
     });
   }
 
+  // 创建问卷元数据
   async createSurveyMeta(params: {
     title: string;
     remark: string;
@@ -75,6 +78,7 @@ export class SurveyMetaService {
     return await this.surveyRepository.save(newSurvey);
   }
 
+  // 更新问卷元数据
   async editSurveyMeta(survey: SurveyMeta) {
     if (
       survey.curStatus.status !== RECORD_STATUS.NEW &&
@@ -90,6 +94,7 @@ export class SurveyMetaService {
     return this.surveyRepository.save(survey);
   }
 
+  // 删除问卷元数据
   async deleteSurveyMeta(survey: SurveyMeta) {
     if (survey.curStatus.status === RECORD_STATUS.REMOVED) {
       throw new HttpException(
@@ -110,6 +115,7 @@ export class SurveyMetaService {
     return this.surveyRepository.save(survey);
   }
 
+  // 获取问卷列表
   async getSurveyMetaList(condition: {
     pageNum: number;
     pageSize: number;
@@ -175,6 +181,7 @@ export class SurveyMetaService {
     }
   }
 
+  // 发布问卷元数据
   async publishSurveyMeta({ surveyMeta }: { surveyMeta: SurveyMeta }) {
     const curStatus = {
       status: RECORD_STATUS.PUBLISHED,
@@ -189,6 +196,7 @@ export class SurveyMetaService {
     return this.surveyRepository.save(surveyMeta);
   }
 
+  // 获取空间下问卷数量
   async countSurveyMetaByWorkspaceId({ workspaceId }) {
     const total = await this.surveyRepository.count({
       workspaceId,

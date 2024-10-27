@@ -9,7 +9,7 @@ import { LocalHandler } from './uploadHandlers/local.handler';
 @Injectable()
 export class FileService {
   constructor(private readonly configService: ConfigService) {}
-
+  // 上传文件
   async upload({
     configKey,
     file,
@@ -19,8 +19,11 @@ export class FileService {
     file: Express.Multer.File;
     pathPrefix: string;
   }) {
+    // 获取处理器
     const handler = this.getHandler(configKey);
+    // 上传文件
     const { key } = await handler.upload(file, { pathPrefix });
+    // 获取文件URL
     const url = await handler.getUrl(key);
     return {
       key,
@@ -28,11 +31,13 @@ export class FileService {
     };
   }
 
-  getUrl({ configKey, key }) {
+  // 获取文件URL
+  async getUrl({ configKey, key }: { configKey: string; key: string }) {
     const handler = this.getHandler(configKey);
     return handler.getUrl(key);
   }
 
+  // 获取处理器
   private getHandler(configKey: string) {
     const staticType = this.configService.get<string>(
       `${configKey}.LOCAL_STATIC_RENDER_TYPE`,

@@ -13,6 +13,7 @@ export class ClientEncryptController {
     private readonly configService: ConfigService,
   ) {}
 
+  // 获取加密信息
   @Get('/getEncryptInfo')
   @HttpCode(200)
   async getEncryptInfo() {
@@ -41,6 +42,7 @@ export class ClientEncryptController {
     };
   }
 
+  // 获取RSA信息
   getRsaInfo(): Promise<{ publicKey; privateKey }> {
     const keyPair = forge.pki.rsa.generateKeyPair({ bits: 2048 });
     const publicKey = forge.pki.publicKeyToPem(keyPair.publicKey);

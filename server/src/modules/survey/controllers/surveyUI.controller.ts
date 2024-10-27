@@ -7,11 +7,13 @@ import { ApiTags } from '@nestjs/swagger';
 export class SurveyUIController {
   constructor() {}
 
+  // 首页
   @Get('/')
   home(@Res() res: Response) {
     res.sendFile(join(process.cwd(), 'public', 'management.html'));
   }
 
+  // 管理页面
   @Get('/management/:path*')
   management(@Res() res: Response) {
     res.sendFile(join(process.cwd(), 'public', 'management.html'));

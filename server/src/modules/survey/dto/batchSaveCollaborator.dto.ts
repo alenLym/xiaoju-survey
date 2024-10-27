@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import Joi from 'joi';
 import { SURVEY_PERMISSION } from 'src/enums/surveyPermission';
 
+// 协作者DTO
 export class CollaboratorDto {
   @ApiProperty({ description: '协作id', required: false })
   _id?: string;
@@ -22,6 +23,7 @@ export class CollaboratorDto {
   permissions: Array<string>;
 }
 
+// 批量保存协作者DTO
 export class BatchSaveCollaboratorDto {
   @ApiProperty({ description: '问卷id', required: true })
   surveyId: string;

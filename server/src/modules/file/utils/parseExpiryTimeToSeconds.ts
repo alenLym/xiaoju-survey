@@ -1,3 +1,4 @@
+// 解析过期时间到秒
 export const parseExpiryTimeToSeconds = (expiryTime: string): number => {
   const units: { [key: string]: number } = {
     s: 1,

@@ -1,5 +1,6 @@
 let count = 999;
 
+// 获取自增序列
 const getCountStr = () => {
   count++;
   if (count > 9000) {
@@ -8,6 +9,7 @@ const getCountStr = () => {
   return count.toString();
 };
 
+// 生成跟踪ID
 export const genTraceId = ({ ip }) => {
   // ip转16位 + 当前时间戳（毫秒级）+自增序列（1000开始自增到9000）+ 当前进程id的后5位
   ip = ip.replace('::ffff:', '');

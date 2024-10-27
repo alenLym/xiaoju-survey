@@ -29,6 +29,7 @@ export class ResponseSchemaController {
     private readonly workspaceMemberService: WorkspaceMemberService,
   ) {}
 
+  // 获取问卷响应结构
   @Get('/getSchema')
   @HttpCode(200)
   async getSchema(

@@ -3,10 +3,12 @@ import { cloneDeep } from 'lodash';
 import { EXCEPTION_CODE } from '../enums/exceptionCode';
 import { HttpException } from '../exceptions/httpException';
 
+// 生成256位hash
 const hash256 = (text) => {
   return createHash('sha256').update(text).digest('hex');
 };
 
+// 根据数据生成签名
 const getSignByData = (sourceData, ts) => {
   const data = cloneDeep(sourceData);
   const keysArr = Object.keys(data);
@@ -21,6 +23,7 @@ const getSignByData = (sourceData, ts) => {
   return `${sign}`;
 };
 
+// 检查签名
 export const checkSign = (sourceData) => {
   const data = cloneDeep(sourceData);
   const sign = data.sign;

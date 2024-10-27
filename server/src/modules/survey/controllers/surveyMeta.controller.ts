@@ -37,6 +37,7 @@ export class SurveyMetaController {
     private readonly collaboratorService: CollaboratorService,
   ) {}
 
+  // 更新问卷元数据
   @Post('/updateMeta')
   @HttpCode(200)
   @UseGuards(SurveyGuard)
@@ -67,6 +68,7 @@ export class SurveyMetaController {
     };
   }
 
+  // 获取问卷列表
   @UseGuards(WorkspaceGuard)
   @SetMetadata('workspacePermissions', [WORKSPACE_PERMISSION.READ_SURVEY])
   @SetMetadata('workspaceId', { optional: true, key: 'query.workspaceId' })

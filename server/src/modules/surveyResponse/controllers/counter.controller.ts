@@ -9,6 +9,7 @@ import { ApiTags } from '@nestjs/swagger';
 export class CounterController {
   constructor(private readonly counterService: CounterService) {}
 
+  // 获取选项统计信息
   @Get('/queryOptionCountInfo')
   @HttpCode(200)
   async queryOptionCountInfo(

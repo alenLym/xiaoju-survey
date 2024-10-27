@@ -7,6 +7,7 @@ import { ApiTags } from '@nestjs/swagger';
 export class SurveyResponseUIController {
   constructor() {}
 
+  // 渲染页面
   @Get('/render/:path*')
   render(@Res() res: Response) {
     res.sendFile(join(process.cwd(), 'public', 'render.html'));

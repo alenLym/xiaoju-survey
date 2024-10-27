@@ -5,6 +5,7 @@ import {
   MESSAGE_PUSHING_HOOK,
 } from 'src/enums/messagePushing';
 
+// 更新推送任务DTO
 export class UpdateMessagePushingTaskDto {
   @ApiProperty({ description: '任务名称', required: false })
   name?: string;

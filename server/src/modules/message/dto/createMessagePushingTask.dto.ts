@@ -5,6 +5,7 @@ import {
   MESSAGE_PUSHING_HOOK,
 } from 'src/enums/messagePushing';
 
+// 创建推送任务DTO
 export class CreateMessagePushingTaskDto {
   @ApiProperty({ description: '任务名称', required: true })
   name: string;
@@ -29,6 +30,7 @@ export class CreateMessagePushingTaskDto {
   })
   surveys?: string[];
 
+  // 验证参数
   static validate(data) {
     return Joi.object({
       name: Joi.string().required(),

@@ -5,6 +5,7 @@ export type Member = {
   _id?: string;
 };
 
+// 拆分成员
 export const splitMembers = (members: Array<Member>) => {
   const newMembers = [],
     adminMembers = [],

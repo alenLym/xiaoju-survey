@@ -28,6 +28,7 @@ export class WorkspaceService {
     private surveyMetaRepository: MongoRepository<SurveyMeta>,
   ) {}
 
+  // 创建空间
   async create(workspace: {
     name: string;
     description: string;
@@ -39,6 +40,7 @@ export class WorkspaceService {
     return this.workspaceRepository.save(newWorkspace);
   }
 
+  // 获取空间信息
   async findOneById(id) {
     return this.workspaceRepository.findOne({
       where: {
@@ -47,6 +49,7 @@ export class WorkspaceService {
     });
   }
 
+  // 获取空间列表
   async findAllById({
     workspaceIdList,
   }: {
@@ -77,6 +80,7 @@ export class WorkspaceService {
     });
   }
 
+  // 获取空间列表
   async findAllByIdWithPagination({
     workspaceIdList,
     page,
@@ -109,10 +113,12 @@ export class WorkspaceService {
     return { list: data, count };
   }
 
-  update(id: string, workspace: Partial<Workspace>) {
+  // 更新空间
+  async update(id: string, workspace: Partial<Workspace>) {
     return this.workspaceRepository.update(id, workspace);
   }
 
+  // 删除空间
   async delete(id: string) {
     const newStatus = {
       status: RECORD_STATUS.REMOVED,

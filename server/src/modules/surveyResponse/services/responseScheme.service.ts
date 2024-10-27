@@ -11,6 +11,7 @@ export class ResponseSchemaService {
     private readonly responseSchemaRepository: MongoRepository<ResponseSchema>,
   ) {}
 
+  // 发布问卷响应结构
   async publishResponseSchema({ title, surveyPath, code, pageId }) {
     const clientSurvey = await this.responseSchemaRepository.findOne({
       where: { surveyPath },
@@ -41,18 +42,21 @@ export class ResponseSchemaService {
     }
   }
 
+  // 获取问卷响应结构
   async getResponseSchemaByPath(surveyPath: string) {
     return this.responseSchemaRepository.findOne({
       where: { surveyPath },
     });
   }
 
+  // 获取问卷响应结构
   async getResponseSchemaByPageId(pageId: string) {
     return this.responseSchemaRepository.findOne({
       where: { pageId },
     });
   }
 
+  // 删除问卷响应结构
   async deleteResponseSchema({ surveyPath }) {
     const responseSchema = await this.responseSchemaRepository.findOne({
       where: { surveyPath },

@@ -1,3 +1,4 @@
+// 本地配置
 const SERVER_LOCAL_CONFIG = {
   LOCAL_STATIC_RENDER_TYPE: 'server', // nginx
   IS_PRIVATE_READ: false,
@@ -5,6 +6,7 @@ const SERVER_LOCAL_CONFIG = {
   NEED_AUTH: true,
 };
 
+// 七牛配置
 const QINIU_CONFIG = {
   FILE_STORAGE_PROVIDER: 'qiniu',
   IS_PRIVATE_READ: false,
@@ -20,6 +22,7 @@ const QINIU_CONFIG = {
   USE_SSL: false, // useSSL
 };
 
+// 阿里云OSS配置
 const ALI_OSS_CONFIG = {
   FILE_STORAGE_PROVIDER: 'ali-oss',
   IS_PRIVATE_READ: false,
@@ -35,6 +38,7 @@ const ALI_OSS_CONFIG = {
   USE_SSL: false, // useSSL
 };
 
+// minio配置
 export const MINIO_CONFIG = {
   FILE_STORAGE_PROVIDER: 'minio',
   IS_PRIVATE_READ: false,
@@ -50,10 +54,12 @@ export const MINIO_CONFIG = {
   USE_SSL: true, // useSSL
 };
 
+// 上传配置
 export const channels = {
   upload: 'SERVER_LOCAL_CONFIG',
 };
 
+// 上传配置
 export const uploadConfig = {
   SERVER_LOCAL_CONFIG,
   QINIU_CONFIG,

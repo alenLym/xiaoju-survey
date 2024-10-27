@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import Joi from 'joi';
 
+// 获取问卷列表DTO
 export class GetSurveyListDto {
   @ApiProperty({ description: '当前页码', required: true })
   curPage: number;

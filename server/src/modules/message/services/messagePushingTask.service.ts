@@ -19,6 +19,7 @@ export class MessagePushingTaskService {
     private readonly messagePushingLogService: MessagePushingLogService,
   ) {}
 
+  // 创建推送任务
   async create(
     createMessagePushingTaskDto: CreateMessagePushingTaskDto & {
       ownerId: string;
@@ -34,6 +35,7 @@ export class MessagePushingTaskService {
     return await this.messagePushingTaskRepository.save(createdTask);
   }
 
+  // 查询推送任务列表
   async findAll({
     surveyId,
     hook,
@@ -64,6 +66,7 @@ export class MessagePushingTaskService {
     });
   }
 
+  // 查询推送任务
   async findOne({
     id,
     ownerId,
@@ -82,6 +85,7 @@ export class MessagePushingTaskService {
     });
   }
 
+  // 更新推送任务
   async update({
     ownerId,
     id,
@@ -104,6 +108,7 @@ export class MessagePushingTaskService {
     return await this.messagePushingTaskRepository.save(updatedTask);
   }
 
+  // 删除推送任务
   async remove({ id, ownerId }: { id: string; ownerId: string }) {
     const curStatus = {
       status: RECORD_STATUS.REMOVED,
@@ -128,6 +133,7 @@ export class MessagePushingTaskService {
     );
   }
 
+  // 给任务绑定新问卷
   async surveyAuthorizeTask({
     taskId,
     surveyId,
@@ -151,6 +157,7 @@ export class MessagePushingTaskService {
     );
   }
 
+  // 数据推送
   async runResponseDataPush({ surveyId, sendData }) {
     try {
       // 数据推送

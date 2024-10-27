@@ -11,6 +11,7 @@ export class ContentSecurityService {
     private readonly wordRepository: MongoRepository<Word>,
   ) {}
 
+  // 初始化禁用词
   private async initForbiddenWords() {
     const words = await this.wordRepository.find({
       where: {
@@ -20,6 +21,7 @@ export class ContentSecurityService {
     this.forbiddenWords = words.map((item) => item.text);
   }
 
+  // 判断是否包含禁用词
   async isForbiddenContent({ text }: { text: string }) {
     if (!this.forbiddenWords) {
       await this.initForbiddenWords();

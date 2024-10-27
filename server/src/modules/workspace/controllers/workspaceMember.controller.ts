@@ -32,6 +32,7 @@ export class WorkspaceMemberController {
     private readonly workspaceMemberService: WorkspaceMemberService,
   ) {}
 
+  // 创建成员
   @Post()
   @SetMetadata('workspacePermissions', [WORKSPACE_PERMISSION.WRITE_MEMBER])
   @SetMetadata('workspaceId', 'body.workspaceId')
@@ -57,6 +58,7 @@ export class WorkspaceMemberController {
     };
   }
 
+  // 获取成员列表
   @Get()
   @SetMetadata('workspacePermissions', [WORKSPACE_PERMISSION.READ_MEMBER])
   @SetMetadata('workspaceId', 'query.workspaceId')
@@ -74,6 +76,7 @@ export class WorkspaceMemberController {
     };
   }
 
+  // 更新成员角色
   @Post('updateRole')
   @SetMetadata('workspacePermissions', [WORKSPACE_PERMISSION.WRITE_MEMBER])
   @SetMetadata('workspaceId', 'body.workspaceId')
@@ -98,6 +101,7 @@ export class WorkspaceMemberController {
     };
   }
 
+  // 删除成员
   @Post('deleteMember')
   @SetMetadata('workspacePermissions', [WORKSPACE_PERMISSION.WRITE_MEMBER])
   @SetMetadata('workspaceId', 'body.id')

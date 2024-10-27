@@ -9,12 +9,14 @@ import { HttpException } from 'src/exceptions/httpException';
 import { UserService } from '../services/user.service';
 import { GetUserListDto } from '../dto/getUserList.dto';
 
+// 用户控制器
 @ApiTags('user')
 @ApiBearerAuth()
 @Controller('/api/user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  // 获取用户列表
   @UseGuards(Authentication)
   @Get('/getUserList')
   @HttpCode(200)
@@ -22,11 +24,13 @@ export class UserController {
     @Query()
     queryInfo: GetUserListDto,
   ) {
+    // 验证参数
     const { value, error } = GetUserListDto.validate(queryInfo);
     if (error) {
       throw new HttpException('参数有误', EXCEPTION_CODE.PARAMETER_ERROR);
     }
 
+    // 获取用户列表
     const userList = await this.userService.getUserListByUsername({
       username: value.username,
       skip: (value.pageIndex - 1) * value.pageSize,

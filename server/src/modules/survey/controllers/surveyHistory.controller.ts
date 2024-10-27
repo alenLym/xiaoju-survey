@@ -27,6 +27,7 @@ export class SurveyHistoryController {
     private readonly logger: Logger,
   ) {}
 
+  // 获取历史记录列表
   @Get('/getList')
   @HttpCode(200)
   @UseGuards(SurveyGuard)

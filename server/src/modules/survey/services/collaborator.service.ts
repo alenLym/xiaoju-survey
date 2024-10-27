@@ -13,6 +13,7 @@ export class CollaboratorService {
     private readonly logger: Logger,
   ) {}
 
+  // 创建协作者
   async create({ surveyId, userId, permissions }) {
     const collaborator = this.collaboratorRepository.create({
       surveyId,
@@ -22,6 +23,7 @@ export class CollaboratorService {
     return this.collaboratorRepository.save(collaborator);
   }
 
+  // 批量创建协作者
   async batchCreate({ surveyId, collaboratorList }) {
     const res = await this.collaboratorRepository.insertMany(
       collaboratorList.map((item) => {
@@ -34,6 +36,7 @@ export class CollaboratorService {
     return res;
   }
 
+  // 获取协作者列表
   async getSurveyCollaboratorList({ surveyId }) {
     const list = await this.collaboratorRepository.find({
       surveyId,
@@ -41,6 +44,7 @@ export class CollaboratorService {
     return list;
   }
 
+  // 获取协作者列表
   async getCollaboratorListByIds({ idList }) {
     const list = await this.collaboratorRepository.find({
       _id: {
@@ -50,6 +54,7 @@ export class CollaboratorService {
     return list;
   }
 
+  // 获取协作者
   async getCollaborator({ userId, surveyId }) {
     const info = await this.collaboratorRepository.findOne({
       where: {
@@ -60,6 +65,7 @@ export class CollaboratorService {
     return info;
   }
 
+  // 修改用户权限
   async changeUserPermission({ userId, surveyId, permission }) {
     const updateRes = await this.collaboratorRepository.updateOne(
       {
@@ -75,6 +81,7 @@ export class CollaboratorService {
     return updateRes;
   }
 
+  // 删除协作者
   async deleteCollaborator({ userId, surveyId }) {
     const delRes = await this.collaboratorRepository.deleteOne({
       userId,
@@ -83,6 +90,7 @@ export class CollaboratorService {
     return delRes;
   }
 
+  // 批量删除协作者
   async batchDelete({
     idList,
     neIdList,
@@ -127,6 +135,7 @@ export class CollaboratorService {
     return delRes;
   }
 
+  // 批量删除协作者
   async batchDeleteBySurveyId(surveyId) {
     const delRes = await this.collaboratorRepository.deleteMany({
       surveyId,
@@ -134,7 +143,8 @@ export class CollaboratorService {
     return delRes;
   }
 
-  updateById({ collaboratorId, permissions }) {
+  // 更新协作者
+  async updateById({ collaboratorId, permissions }) {
     return this.collaboratorRepository.updateOne(
       {
         _id: new ObjectId(collaboratorId),
@@ -147,7 +157,8 @@ export class CollaboratorService {
     );
   }
 
-  getCollaboratorListByUserId({ userId }) {
+  // 获取协作者列表
+  async getCollaboratorListByUserId({ userId }) {
     return this.collaboratorRepository.find({
       where: {
         userId,

@@ -7,16 +7,23 @@ import { HttpException } from 'src/exceptions/httpException';
 import { EXCEPTION_CODE } from 'src/enums/exceptionCode';
 import { create } from 'svg-captcha';
 import { ApiTags } from '@nestjs/swagger';
+
+// 认证控制器
 @ApiTags('auth')
 @Controller('/api/auth')
 export class AuthController {
   constructor(
+    // 用户服务
     private readonly userService: UserService,
+    // 验证码服务
     readonly captchaService: CaptchaService,
+    // 配置服务
     private readonly configService: ConfigService,
+    // 认证服务
     private readonly authService: AuthService,
   ) {}
 
+  // 注册
   @Post('/register')
   @HttpCode(200)
   async register(
@@ -28,6 +35,7 @@ export class AuthController {
       captcha: string;
     },
   ) {
+    // 验证验证码
     const isCorrect = await this.captchaService.checkCaptchaIsCorrect({
       captcha: userInfo.captcha,
       id: userInfo.captchaId,
@@ -37,11 +45,13 @@ export class AuthController {
       throw new HttpException('验证码不正确', EXCEPTION_CODE.CAPTCHA_INCORRECT);
     }
 
+    // 创建用户
     const user = await this.userService.createUser({
       username: userInfo.username,
       password: userInfo.password,
     });
 
+    // 生成token
     const token = await this.authService.generateToken(
       {
         username: user.username,
@@ -65,6 +75,7 @@ export class AuthController {
     };
   }
 
+  // 登录
   @Post('/login')
   @HttpCode(200)
   async login(
@@ -76,6 +87,7 @@ export class AuthController {
       captcha: string;
     },
   ) {
+    // 验证验证码
     const isCorrect = await this.captchaService.checkCaptchaIsCorrect({
       captcha: userInfo.captcha,
       id: userInfo.captchaId,
@@ -85,6 +97,7 @@ export class AuthController {
       throw new HttpException('验证码不正确', EXCEPTION_CODE.CAPTCHA_INCORRECT);
     }
 
+    // 验证用户名
     const username = await this.userService.getUserByUsername(
       userInfo.username,
     );
@@ -95,6 +108,7 @@ export class AuthController {
       );
     }
 
+    // 验证密码
     const user = await this.userService.getUser({
       username: userInfo.username,
       password: userInfo.password,
@@ -107,6 +121,7 @@ export class AuthController {
     }
     let token;
     try {
+      // 生成token
       token = await this.authService.generateToken(
         {
           username: user.username,
@@ -139,12 +154,14 @@ export class AuthController {
     };
   }
 
+  // 获取验证码
   @Post('/captcha')
   @HttpCode(200)
   async getCaptcha(): Promise<{
     code: number;
     data: { id: string; img: string };
   }> {
+    // 创建验证码
     const captchaData = create({
       size: 4, // 验证码长度
       ignoreChars: '0o1i', // 忽略字符
@@ -152,6 +169,7 @@ export class AuthController {
       color: true, // 启用彩色
       background: '#f0f0f0', // 背景色
     });
+    // 创建验证码
     const res = await this.captchaService.createCaptcha(captchaData.text);
 
     return {

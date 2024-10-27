@@ -7,20 +7,27 @@ const addressRegex = /.*省|.*自治区|.*市|.*区|.*镇|.*县/; // 地址正�
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 邮箱正则
 const genderArr = ['男', '女']; // 性别
 
+// 判断是否为手机号码
 const isPhone = (data: string) => phoneRegex.test(data);
 
+// 判断是否为身份证号码
 const isIdCard = (data: string) => idCardRegex.test(data);
 
+// 判断是否为地址
 const isAddress = (data: string) => addressRegex.test(data);
 
+// 判断是否为邮箱
 const isEmail = (data: string) => emailRegex.test(data);
 
+// 判断是否为性别
 const isGender = (data: string) => genderArr.includes(data);
 
+// 判断是否为字符串
 const isString = (data) => {
   return typeof data === 'string';
 };
 
+// 判断是否为敏感数据
 export const isDataSensitive = (data): boolean => {
   if (!isString(data)) {
     return false;
@@ -36,6 +43,7 @@ export const isDataSensitive = (data): boolean => {
   return false;
 };
 
+// 加密数据
 export const encryptData = (data, { secretKey }) => {
   if (!isString(data)) {
     return data;
@@ -43,6 +51,7 @@ export const encryptData = (data, { secretKey }) => {
   return CryptoJS.AES.encrypt(data, secretKey).toString();
 };
 
+// 解密数据
 export const decryptData = (data, { secretKey }) => {
   if (!isString(data)) {
     return data;
@@ -50,6 +59,7 @@ export const decryptData = (data, { secretKey }) => {
   return CryptoJS.AES.decrypt(data, secretKey).toString(CryptoJS.enc.Utf8);
 };
 
+// 脱敏数据
 export const desensitiveData = (data: string): string => {
   if (!isString(data)) {
     return '*';

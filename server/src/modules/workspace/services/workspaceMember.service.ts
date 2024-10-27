@@ -12,6 +12,7 @@ export class WorkspaceMemberService {
     private workspaceMemberRepository: MongoRepository<WorkspaceMember>,
   ) {}
 
+  // 创建成员
   async create(member: {
     role: string;
     userId: string;
@@ -21,6 +22,7 @@ export class WorkspaceMemberService {
     return this.workspaceMemberRepository.save(newMember);
   }
 
+  // 批量创建成员
   async batchCreate({
     workspaceId,
     members,
@@ -42,6 +44,7 @@ export class WorkspaceMemberService {
     return this.workspaceMemberRepository.insertMany(dataToInsert);
   }
 
+  // 批量更新成员角色
   async batchUpdate({ idList, role }: { idList: Array<string>; role: string }) {
     if (idList.length === 0) {
       return {
@@ -62,6 +65,7 @@ export class WorkspaceMemberService {
     );
   }
 
+  // 批量删除成员
   async batchDelete({
     idList,
     neIdList,
@@ -82,6 +86,7 @@ export class WorkspaceMemberService {
     });
   }
 
+  // 根据用户id查询成员
   async findAllByUserId({ userId }): Promise<WorkspaceMember[]> {
     return this.workspaceMemberRepository.find({
       where: {
@@ -90,6 +95,7 @@ export class WorkspaceMemberService {
     });
   }
 
+  // 根据空间id查询成员
   async findAllByWorkspaceId({ workspaceId }): Promise<WorkspaceMember[]> {
     return this.workspaceMemberRepository.find({
       where: {
@@ -102,6 +108,7 @@ export class WorkspaceMemberService {
     });
   }
 
+  // 根据空间id和用户id查询成员
   async findOne({ workspaceId, userId }): Promise<WorkspaceMember> {
     return this.workspaceMemberRepository.findOne({
       where: {
@@ -111,6 +118,7 @@ export class WorkspaceMemberService {
     });
   }
 
+  // 更新成员角色
   async updateRole({ workspaceId, userId, role }) {
     return this.workspaceMemberRepository.updateOne(
       {
@@ -125,6 +133,7 @@ export class WorkspaceMemberService {
     );
   }
 
+  // 删除成员
   async deleteMember({ workspaceId, userId }) {
     return this.workspaceMemberRepository.deleteOne({
       workspaceId,
@@ -132,6 +141,7 @@ export class WorkspaceMemberService {
     });
   }
 
+  // 根据空间id统计成员数量
   async countByWorkspaceId({ workspaceId }) {
     return this.workspaceMemberRepository.count({
       workspaceId,

@@ -49,6 +49,7 @@ export class WorkspaceController {
     private readonly logger: Logger,
   ) {}
 
+  // 获取角色列表
   @Get('getRoleList')
   @HttpCode(200)
   async getRoleList() {
@@ -59,7 +60,8 @@ export class WorkspaceController {
     };
   }
 
-  @Post()
+  // 创建空间
+    @Post()
   @HttpCode(200)
   async create(@Body() workspace: CreateWorkspaceDto, @Request() req) {
     const { value, error } = CreateWorkspaceDto.validate(workspace);
@@ -130,6 +132,7 @@ export class WorkspaceController {
     };
   }
 
+  // 获取空间列表
   @Get()
   @HttpCode(200)
   async findAll(@Request() req, @Query() queryInfo: GetWorkspaceListDto) {
@@ -223,6 +226,7 @@ export class WorkspaceController {
     };
   }
 
+  // 获取空间信息
   @Get(':id')
   @HttpCode(200)
   @UseGuards(WorkspaceGuard)
@@ -267,6 +271,7 @@ export class WorkspaceController {
     };
   }
 
+  // 更新空间
   @Post(':id')
   @HttpCode(200)
   @UseGuards(WorkspaceGuard)
@@ -340,6 +345,7 @@ export class WorkspaceController {
     };
   }
 
+  // 删除空间
   @Delete(':id')
   @HttpCode(200)
   @UseGuards(WorkspaceGuard)
@@ -353,6 +359,7 @@ export class WorkspaceController {
     };
   }
 
+  // 获取空间和成员
   @Get('/member/list')
   @HttpCode(200)
   async getWorkspaceAndMember(@Request() req) {

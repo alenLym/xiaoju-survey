@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import Joi from 'joi';
 import { SURVEY_PERMISSION } from 'src/enums/surveyPermission';
 
+// 创建协作者DTO
 export class CreateCollaboratorDto {
   @ApiProperty({ description: '问卷id', required: true })
   surveyId: string;
@@ -12,6 +13,7 @@ export class CreateCollaboratorDto {
   @ApiProperty({ description: '权限', required: true, enum: SURVEY_PERMISSION })
   permissions: Array<string>;
 
+  // 验证参数
   static validate(data) {
     return Joi.object({
       surveyId: Joi.string(),

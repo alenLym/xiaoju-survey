@@ -46,6 +46,7 @@ export class CollaboratorController {
     private readonly workspaceMemberServie: WorkspaceMemberService,
   ) {}
 
+  // 获取权限列表
   @Get('getPermissionList')
   @HttpCode(200)
   async getPermissionList() {
@@ -54,8 +55,9 @@ export class CollaboratorController {
       code: 200,
       data: vals,
     };
-  }
+    }
 
+  // 添加协作者
   @Post('')
   @HttpCode(200)
   @UseGuards(SurveyGuard)
@@ -111,6 +113,7 @@ export class CollaboratorController {
     };
   }
 
+  // 批量保存协作者
   @Post('batchSave')
   @HttpCode(200)
   @UseGuards(SurveyGuard)
@@ -216,6 +219,7 @@ export class CollaboratorController {
     };
   }
 
+  // 获取协作者列表
   @Get('')
   @HttpCode(200)
   @UseGuards(SurveyGuard)
@@ -256,6 +260,7 @@ export class CollaboratorController {
     };
   }
 
+  // 修改用户权限
   @Post('changeUserPermission')
   @HttpCode(200)
   @UseGuards(SurveyGuard)
@@ -285,6 +290,7 @@ export class CollaboratorController {
     };
   }
 
+  // 删除协作者
   @Post('deleteCollaborator')
   @HttpCode(200)
   @UseGuards(SurveyGuard)
@@ -310,6 +316,7 @@ export class CollaboratorController {
     };
   }
 
+  // 获取用户问卷权限
   @HttpCode(200)
   @Get('permissions')
   async getUserSurveyPermissions(@Request() req, @Query() query) {

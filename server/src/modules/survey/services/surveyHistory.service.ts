@@ -12,6 +12,7 @@ export class SurveyHistoryService {
     private readonly surveyHistory: MongoRepository<SurveyHistory>,
   ) {}
 
+  // 添加历史记录
   async addHistory(params: {
     surveyId: string;
     schema: SurveySchemaInterface;
@@ -31,6 +32,7 @@ export class SurveyHistoryService {
     return this.surveyHistory.save(newHistory);
   }
 
+  // 获取历史记录列表
   async getHistoryList({
     surveyId,
     historyType,

@@ -6,6 +6,7 @@ import {
 } from 'src/enums/messagePushing';
 import { RECORD_STATUS } from 'src/enums';
 
+// 推送任务DTO
 export class MessagePushingTaskDto {
   @ApiProperty({ description: '任务id' })
   _id: string;
@@ -35,16 +36,19 @@ export class MessagePushingTaskDto {
   };
 }
 
+// 状态码DTO
 export class CodeDto {
   @ApiProperty({ description: '状态码', default: 200 })
   code: number;
 }
 
+// 任务idDTO
 export class TaskIdDto {
   @ApiProperty({ description: '任务id' })
   taskId: string;
 }
 
+// 成功响应DTO
 export class MessagePushingTaskSucceedResponseDto {
   @ApiProperty({ description: '状态码', default: 200 })
   code: number;

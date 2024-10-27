@@ -9,6 +9,7 @@ export class SurveyResponseService {
     private readonly surveyResponseRepository: MongoRepository<SurveyResponse>,
   ) {}
 
+  // 创建响应
   async createSurveyResponse({
     data,
     clientTime,
@@ -34,6 +35,7 @@ export class SurveyResponseService {
     return res;
   }
 
+  // 获取问卷响应总数
   async getSurveyResponseTotalByPath(surveyPath: string) {
     const count = await this.surveyResponseRepository.count({
       where: {

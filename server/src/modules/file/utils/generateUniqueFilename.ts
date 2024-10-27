@@ -1,6 +1,7 @@
 import { promisify } from 'util';
 import { randomBytes } from 'crypto';
 
+// 生成唯一文件名
 export const generateUniqueFilename = async (
   originalname: string,
 ): Promise<string> => {

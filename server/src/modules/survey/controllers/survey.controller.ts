@@ -45,6 +45,7 @@ export class SurveyController {
     private readonly logger: Logger,
   ) {}
 
+  // 获取banner数据
   @Get('/getBannerData')
   @HttpCode(200)
   async getBannerData() {
@@ -54,6 +55,7 @@ export class SurveyController {
     };
   }
 
+  // 创建问卷
   @Post('/createSurvey')
   @HttpCode(200)
   @UseGuards(SurveyGuard)
@@ -114,6 +116,7 @@ export class SurveyController {
     };
   }
 
+  // 更新问卷配置
   @Post('/updateConf')
   @HttpCode(200)
   @UseGuards(SurveyGuard)
@@ -156,6 +159,7 @@ export class SurveyController {
     };
   }
 
+  // 删除问卷
   @HttpCode(200)
   @Post('/deleteSurvey')
   @UseGuards(SurveyGuard)
@@ -175,6 +179,7 @@ export class SurveyController {
     };
   }
 
+  // 获取问卷
   @Get('/getSurvey')
   @HttpCode(200)
   @UseGuards(SurveyGuard)
@@ -234,6 +239,7 @@ export class SurveyController {
     };
   }
 
+  // 获取预览问卷
   @Get('/getPreviewSchema')
   @HttpCode(200)
   async getPreviewSchema(
@@ -266,6 +272,7 @@ export class SurveyController {
     };
   }
 
+  // 发布问卷
   @Post('/publishSurvey')
   @HttpCode(200)
   @UseGuards(SurveyGuard)

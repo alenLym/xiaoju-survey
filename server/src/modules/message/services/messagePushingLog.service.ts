@@ -11,6 +11,7 @@ export class MessagePushingLogService {
     private readonly messagePushingLogRepository: MongoRepository<MessagePushingLog>,
   ) {}
 
+  // 创建推送日志
   async createPushingLog({
     taskId,
     request,
@@ -26,6 +27,7 @@ export class MessagePushingLogService {
     return await this.messagePushingLogRepository.save(createdLog);
   }
 
+  // 查询推送日志
   async findAllByTaskId(taskId: string): Promise<MessagePushingLog[]> {
     return await this.messagePushingLogRepository.find({
       where: {
@@ -34,6 +36,7 @@ export class MessagePushingLogService {
     });
   }
 
+  // 查询推送日志
   async findOne(id: string): Promise<MessagePushingLog> {
     return await this.messagePushingLogRepository.findOne({
       where: {

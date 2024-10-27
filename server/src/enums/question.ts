@@ -19,7 +19,7 @@ export enum QUESTION_TYPE {
    */
   CHECKBOX = 'checkbox',
   /**
-   * 判断题
+   * 判断题 
    */
   BINARY_CHOICE = 'binary-choice',
   /**

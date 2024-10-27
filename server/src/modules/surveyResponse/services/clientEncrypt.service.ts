@@ -13,6 +13,7 @@ export class ClientEncryptService {
     private readonly clientEncryptRepository: MongoRepository<ClientEncrypt>,
   ) {}
 
+  // 添加AES信息
   addAes({ secretKey }) {
     const encryptInfo = this.clientEncryptRepository.create({
       data: {
@@ -23,6 +24,7 @@ export class ClientEncryptService {
     return this.clientEncryptRepository.save(encryptInfo);
   }
 
+  // 添加RSA信息
   addRsa({ publicKey, privateKey }) {
     const encryptInfo = this.clientEncryptRepository.create({
       data: {
@@ -34,6 +36,7 @@ export class ClientEncryptService {
     return this.clientEncryptRepository.save(encryptInfo);
   }
 
+  // 获取加密信息
   getEncryptInfoById(id) {
     return this.clientEncryptRepository.findOne({
       where: {
@@ -45,6 +48,7 @@ export class ClientEncryptService {
     });
   }
 
+  // 删除加密信息
   deleteEncryptInfo(id: string) {
     return this.clientEncryptRepository.updateOne(
       {

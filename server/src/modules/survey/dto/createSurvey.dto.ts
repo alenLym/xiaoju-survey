@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import Joi from 'joi';
 
+// 创建问卷DTO
 export class CreateSurveyDto {
   @ApiProperty({ description: '问卷标题', required: true })
   title: string;

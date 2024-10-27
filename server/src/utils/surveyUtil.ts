@@ -1,19 +1,23 @@
+// 过滤项
 export type FilterItem = {
   comparator?: string;
   condition: Array<FilterCondition>;
 };
 
+// 过滤条件
 export type FilterCondition = {
   field: string;
   comparator?: string;
   value: string & Array<FilterItem>;
 };
 
-export type OrderItem = {
+// 排序项
+  export type OrderItem = {
   field: string;
   value: number;
 };
 
+// 获取过滤条件
 export function getFilter(filterList: Array<FilterItem>) {
   const allowFilterField = [
     'title',
@@ -60,6 +64,7 @@ export function getFilter(filterList: Array<FilterItem>) {
   );
 }
 
+// 获取排序项
 export function getOrder(order: Array<OrderItem>) {
   const allowOrderFields = ['createDate', 'updateDate', 'curStatus.date'];
 

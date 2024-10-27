@@ -1,3 +1,4 @@
+// 异常码
 export enum EXCEPTION_CODE {
   AUTHENTICATION_FAILED = 1001, // 未授权
   PARAMETER_ERROR = 1002, // 参数有误

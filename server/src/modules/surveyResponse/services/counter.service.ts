@@ -10,6 +10,7 @@ export class CounterService {
     private readonly counterRepository: MongoRepository<Counter>,
   ) {}
 
+  // 设置选项统计信息
   async set({
     surveyPath,
     key,
@@ -41,6 +42,7 @@ export class CounterService {
     );
   }
 
+  // 获取选项统计信息
   async get({ surveyPath, key, type }): Promise<Record<string, any>> {
     const countData = await this.counterRepository.findOne({
       where: {
@@ -52,6 +54,7 @@ export class CounterService {
     return countData?.data;
   }
 
+  // 获取所有选项统计信息
   async getAll({ surveyPath, keyList, type }) {
     const res = await this.counterRepository.find({
       where: {

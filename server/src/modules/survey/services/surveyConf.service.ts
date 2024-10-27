@@ -15,6 +15,7 @@ export class SurveyConfService {
     private readonly surveyConfRepository: MongoRepository<SurveyConf>,
   ) {}
 
+  // 创建问卷配置
   async createSurveyConf(params: {
     surveyId: string;
     surveyType: string;
@@ -45,6 +46,7 @@ export class SurveyConfService {
     return this.surveyConfRepository.save(newCode);
   }
 
+  // 获取问卷配置
   async getSurveyConfBySurveyId(surveyId: string) {
     const code = await this.surveyConfRepository.findOne({
       where: { pageId: surveyId },
@@ -55,6 +57,7 @@ export class SurveyConfService {
     return code;
   }
 
+  // 保存问卷配置
   async saveSurveyConf(params: {
     surveyId: string;
     schema: SurveySchemaInterface;
@@ -67,6 +70,7 @@ export class SurveyConfService {
     await this.surveyConfRepository.save(codeInfo);
   }
 
+  // 获取问卷内容
   async getSurveyContentByCode(codeInfo: SurveySchemaInterface) {
     const dataList = codeInfo.dataConf.dataList;
     const arr: Array<string> = [];

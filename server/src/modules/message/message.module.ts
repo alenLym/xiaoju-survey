@@ -14,6 +14,7 @@ import { AuthModule } from '../auth/auth.module';
 
 import { LoggerProvider } from 'src/logger/logger.provider';
 
+// 消息推送模块
 @Module({
   imports: [
     TypeOrmModule.forFeature([MessagePushingTask, MessagePushingLog]),

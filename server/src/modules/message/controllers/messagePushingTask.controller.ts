@@ -47,6 +47,7 @@ export class MessagePushingTaskController {
     req,
     @Body() createMessagePushingTaskDto: CreateMessagePushingTaskDto,
   ) {
+    // 验证参数
     const { error, value } = CreateMessagePushingTaskDto.validate(
       createMessagePushingTaskDto,
     );
@@ -58,6 +59,7 @@ export class MessagePushingTaskController {
     }
     const userId = req.user._id;
 
+    // 创建推送任务
     const messagePushingTask = await this.messagePushingTaskService.create({
       ...value,
       ownerId: userId,
@@ -81,6 +83,7 @@ export class MessagePushingTaskController {
     req,
     @Query() query: QueryMessagePushingTaskListDto,
   ) {
+    // 验证参数
     const { error, value } = QueryMessagePushingTaskListDto.validate(query);
     if (error) {
       throw new HttpException(
@@ -89,6 +92,7 @@ export class MessagePushingTaskController {
       );
     }
     const userId = req.user._id;
+    // 查询推送任务列表
     const list = await this.messagePushingTaskService.findAll({
       surveyId: value.surveyId,
       hook: value.triggerHook,
@@ -108,6 +112,7 @@ export class MessagePushingTaskController {
   @Get(':id')
   async findOne(@Request() req, @Param('id') id: string) {
     const userId = req.user._id;
+    // 查询推送任务
     const task = await this.messagePushingTaskService.findOne({
       ownerId: userId,
       id,
@@ -130,6 +135,7 @@ export class MessagePushingTaskController {
     @Body() updateMessagePushingTaskDto: UpdateMessagePushingTaskDto,
   ) {
     const userId = req.user._id;
+    // 更新推送任务
     const newTask = await this.messagePushingTaskService.update({
       id,
       ownerId: userId,
@@ -149,6 +155,7 @@ export class MessagePushingTaskController {
   @Delete(':id')
   async remove(@Request() req, @Param('id') id: string) {
     const userId = req.user._id;
+    // 删除推送任务
     const res = await this.messagePushingTaskService.remove({
       ownerId: userId,
       id,
@@ -170,6 +177,7 @@ export class MessagePushingTaskController {
     @Param('surveyId') surveyId: string,
   ) {
     const userId = req.user._id;
+    // 给任务绑定新问卷
     const res = await this.messagePushingTaskService.surveyAuthorizeTask({
       taskId,
       surveyId,

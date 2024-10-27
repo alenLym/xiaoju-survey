@@ -3,12 +3,15 @@ import Joi from 'joi';
 import { ROLE as WORKSPACE_ROLE } from 'src/enums/workspace';
 
 export class CreateWorkspaceDto {
+  // 空间名称
   @ApiProperty({ description: '空间名称', required: true })
   name: string;
 
+  // 空间描述
   @ApiProperty({ description: '空间描述', required: false })
   description?: string;
 
+  // 空间成员
   @ApiProperty({ description: '空间成员', required: true })
   members: Array<{ userId: string; role: WORKSPACE_ROLE; _id?: string }>;
 

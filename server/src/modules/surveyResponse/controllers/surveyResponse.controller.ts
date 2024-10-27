@@ -35,6 +35,7 @@ export class SurveyResponseController {
     private readonly workspaceMemberService: WorkspaceMemberService,
   ) {}
 
+  // 创建响应
   @Post('/createResponse')
   @HttpCode(200)
   async createResponse(@Body() reqBody, @Request() req) {

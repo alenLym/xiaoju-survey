@@ -9,6 +9,7 @@ import {
 
 export class ResponseSecurityPlugin implements XiaojuSurveyPlugin {
   constructor(private readonly secretKey: string) {}
+  // 创建响应前加密数据
   beforeResponseDataCreate(responseData: SurveyResponse) {
     const secretKeys = [];
     if (responseData.data) {
@@ -39,6 +40,7 @@ export class ResponseSecurityPlugin implements XiaojuSurveyPlugin {
     responseData.secretKeys = secretKeys;
   }
 
+  // 读取响应后解密数据
   afterResponseDataReaded(responseData: SurveyResponse) {
     const secretKeys = responseData.secretKeys;
     if (Array.isArray(secretKeys) && secretKeys.length > 0) {
@@ -57,6 +59,7 @@ export class ResponseSecurityPlugin implements XiaojuSurveyPlugin {
     responseData.secretKeys = [];
   }
 
+  // 脱敏数据
   desensitiveData(data: Record<string, any>) {
     Object.keys(data).forEach((key) => {
       if (isDataSensitive(data[key])) {

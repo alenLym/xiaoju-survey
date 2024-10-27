@@ -5,7 +5,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   const PORT = process.env.PORT || 3000;
   const app = await NestFactory.create(AppModule);
-
+  // 创建文档
   const config = new DocumentBuilder()
     .setTitle('XIAOJU SURVEY')
     .setDescription('')
@@ -17,8 +17,9 @@ async function bootstrap() {
     .addTag('ui')
     .addBearerAuth()
     .build();
-
+  // 创建文档
   const document = SwaggerModule.createDocument(app, config);
+  // 设置文档
   SwaggerModule.setup('swagger', app, document);
 
   await app.listen(PORT);
