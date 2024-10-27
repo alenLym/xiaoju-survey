@@ -2,12 +2,15 @@ import { MiddlewareConsumer, Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 
+// plugins
 import { ResponseSecurityPlugin } from './securityPlugin/responseSecurityPlugin';
 import { SurveyUtilPlugin } from './securityPlugin/surveyUtilPlugin';
 
+// nestjs
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
+// modules
 import { SurveyModule } from './modules/survey/survey.module';
 import { SurveyResponseModule } from './modules/surveyResponse/surveyResponse.module';
 import { AuthModule } from './modules/auth/auth.module';
@@ -17,9 +20,11 @@ import { WorkspaceModule } from './modules/workspace/workspace.module';
 
 import { join } from 'path';
 
+// nestjs
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionsFilter } from './exceptions/httpExceptions.filter';
 
+// entities
 import { Captcha } from './models/captcha.entity';
 import { User } from './models/user.entity';
 import { SurveyMeta } from './models/surveyMeta.entity';
@@ -36,6 +41,7 @@ import { WorkspaceMember } from './models/workspaceMember.entity';
 import { Workspace } from './models/workspace.entity';
 import { Collaborator } from './models/collaborator.entity';
 
+// providers
 import { LoggerProvider } from './logger/logger.provider';
 import { PluginManagerProvider } from './securityPlugin/pluginManager.provider';
 import { LogRequestMiddleware } from './middlewares/logRequest.middleware';
