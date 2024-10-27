@@ -1,48 +1,81 @@
 import {
+  // 导入Body装饰器
   Body,
+  // 导入Controller装饰器
   Controller,
+  // 导入Get装饰器
   Get,
+  // 导入HttpCode装饰器
   HttpCode,
+  // 导入Post装饰器
   Post,
+  // 导入Query装饰器
   Query,
+  // 导入Request装饰器
   Request,
+  // 导入SetMetadata装饰器
   SetMetadata,
+  // 导入UseGuards装饰器
   UseGuards,
 } from '@nestjs/common';
+// 导入ApiTags装饰器
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
+// 导入Joi库
 import * as Joi from 'joi';
 
+// 导入Authentication守卫
 import { Authentication } from 'src/guards/authentication.guard';
+// 导入HttpException
 import { HttpException } from 'src/exceptions/httpException';
+// 导入EXCEPTION_CODE
 import { EXCEPTION_CODE } from 'src/enums/exceptionCode';
+// 导入SurveyGuard守卫
 import { SurveyGuard } from 'src/guards/survey.guard';
+// 导入SURVEY_PERMISSION和SURVEY_PERMISSION_DESCRIPTION
 import {
   SURVEY_PERMISSION,
   SURVEY_PERMISSION_DESCRIPTION,
 } from 'src/enums/surveyPermission';
+// 导入Logger
 import { Logger } from 'src/logger';
+// 导入WorkspaceMemberService
 import { WorkspaceMemberService } from 'src/modules/workspace/services/workspaceMember.service';
-
+// 导入CollaboratorService
 import { CollaboratorService } from '../services/collaborator.service';
+// 导入UserService
 import { UserService } from 'src/modules/auth/services/user.service';
-
+// 导入CreateCollaboratorDto
 import { CreateCollaboratorDto } from '../dto/createCollaborator.dto';
+// 导入ChangeUserPermissionDto
 import { ChangeUserPermissionDto } from '../dto/changeUserPermission.dto';
+// 导入GetSurveyCollaboratorListDto
 import { GetSurveyCollaboratorListDto } from '../dto/getSurveyCollaboratorList.dto';
+// 导入BatchSaveCollaboratorDto
 import { BatchSaveCollaboratorDto } from '../dto/batchSaveCollaborator.dto';
+// 导入splitCollaborators
 import { splitCollaborators } from '../utils/splitCollaborator';
+// 导入SurveyMetaService
 import { SurveyMetaService } from '../services/surveyMeta.service';
 
+// 使用Authentication守卫
 @UseGuards(Authentication)
+// 使用ApiTags装饰器
 @ApiTags('collaborator')
+// 使用ApiBearerAuth装饰器
 @ApiBearerAuth()
+// 使用Controller装饰器
 @Controller('/api/collaborator')
 export class CollaboratorController {
   constructor(
+    // 注入CollaboratorService
     private readonly collaboratorService: CollaboratorService,
+    // 注入Logger
     private readonly logger: Logger,
+    // 注入UserService
     private readonly userService: UserService,
+    // 注入SurveyMetaService
     private readonly surveyMetaService: SurveyMetaService,
+    // 注入WorkspaceMemberService
     private readonly workspaceMemberServie: WorkspaceMemberService,
   ) {}
 
